@@ -1,4 +1,7 @@
 from sklearn import tree
+import numpy as np
+from scipy import sparse
+
 
 clf = tree.DecisionTreeClassifier()
 
