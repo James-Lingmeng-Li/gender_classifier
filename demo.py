@@ -27,3 +27,4 @@ prediction = clf.predict([[190, 70, 44]])
 # CHALLENGE compare their reusults and print the best one!
 
 print(prediction)
+print("hello world")
