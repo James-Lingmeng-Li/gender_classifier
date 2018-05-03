@@ -1,13 +1,13 @@
-from sklearn import tree
 import numpy as np
 from scipy import sparse
 import csv
+from sklearn import tree
 
 # gender
-independent_list = []
+Y = []
 
 # [height, weight, shoe_size]
-dependent_list = []
+X = []
 
 # read CSV file
 genderFile = open('gender.csv')
@@ -17,23 +17,40 @@ genderReader = csv.reader(genderFile)
 iter_genderReader = iter(genderReader)
 next(iter_genderReader)
 
+
 # populate lists
 for row in iter_genderReader:
-   independent_list.append(row[0])
-   dependent_list.append(row[1:])
+   Y.append(row[0])
+   X.append(row[1:])
 
-# instantiate the classifier
+# close CSV file
+genderFile.close()
+
+# initialize classifier
 clf = tree.DecisionTreeClassifier()
 
-# train the classifier using the data
-clf = clf.fit(dependent_list, independent_list)
+# train classifier using data set
+clf = clf.fit(X, Y)
 
-# enter prediction values
+# enter user values for  classifier
 height = input('What is your height? (cm)')
 weight = input('What is your weight? (kg)')
 shoe_size = input('What is your shoe size? (eu)')
 
 #classifier prediction
 prediction = clf.predict([[height, weight, shoe_size]])
+gender = prediction[0]
 
-print(prediction)
+# write user values to data set if prediction is correct
+validation = input('Is ' + gender + ' correct? (y/n)')
+if validation == "y":
+    genderFile = open('gender.csv','a',newline='')
+    genderWriter = csv.writer(genderFile)
+    genderWriter.writerow([gender,height,weight,shoe_size])
+    genderFile.close()
+else:
+    exit()
+
+
+
+
