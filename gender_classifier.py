@@ -1,9 +1,8 @@
 import numpy as np
 from scipy import sparse
 import csv
-from sklearn import tree
+from sklearn import tree, svm
 from sklearn.linear_model import SGDClassifier
-from sklearn import svm
 
 # gender
 Y = []
