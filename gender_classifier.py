@@ -51,9 +51,15 @@ prediction3 = clf3.predict([[height, weight, shoe_size]])
 gender = prediction[0]
 gender2 = prediction2[0]
 gender3 = prediction3[0]
-print("Decision Tree - " + gender)
-print("SGD Classifier - " + gender2)
-print("Linear SVC - " + gender3)
+
+accuracy = clf.score(X, Y)
+accuracy2 = clf2.score(X, Y)
+accuracy3 = clf3.score(X, Y)
+
+print("Decision Tree - " + gender + str(accuracy))
+print("SGD Classifier - " + gender2 + str(accuracy2))
+print("Linear SVC - " + gender3 + str(accuracy3))
+
 
 # determine result
 result = ''
