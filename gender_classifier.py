@@ -23,15 +23,15 @@ for row in iter_genderReader:
    Y.append(row[0])
    X.append(row[1:])
 
+# close CSV file
+genderFile.close()
+
 # covert string values to numbers
 X_len = len(X)
 for row in range(X_len):
     X[row][0] = float(X[row][0])
     X[row][1] = float(X[row][1])
     X[row][2] = float(X[row][2])
-
-# close CSV file
-genderFile.close()
 
 # initialize classifier
 clf = svm.LinearSVC()
@@ -76,7 +76,7 @@ if result == 'Male':
 else:
     anti_result = 'Male'
 
-# write user values to data set if prediction is correct
+# write user values to data set
 validation = input('Is ' + result + ' correct? (y/n)')
 if validation == "y":
     genderFile = open('gender.csv','a',newline='')
