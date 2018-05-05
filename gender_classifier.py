@@ -2,7 +2,7 @@ import numpy as np
 from scipy import sparse
 import csv
 from sklearn import tree, svm
-from sklearn.linear_model import SGDClassifier
+from sklearn.neighbors.nearest_centroid import NearestCentroid
 
 # gender
 Y = []
@@ -19,17 +19,26 @@ iter_genderReader = iter(genderReader)
 next(iter_genderReader)
 
 
+
+
 # populate lists
 for row in iter_genderReader:
    Y.append(row[0])
    X.append(row[1:])
+
+# covert string values to numbers
+X_len = len(X)
+for row in range(X_len):
+    X[row][0] = float(X[row][0])
+    X[row][1] = float(X[row][1])
+    X[row][2] = float(X[row][2])
 
 # close CSV file
 genderFile.close()
 
 # initialize classifier
 clf = tree.DecisionTreeClassifier()
-clf2 = SGDClassifier()
+clf2 = NearestCentroid()
 clf3 = svm.SVC()
 
 # train classifier using data set
@@ -52,14 +61,9 @@ gender = prediction[0]
 gender2 = prediction2[0]
 gender3 = prediction3[0]
 
-accuracy = clf.score(X, Y)
-accuracy2 = clf2.score(X, Y)
-accuracy3 = clf3.score(X, Y)
-
-print("Decision Tree - " + gender + str(accuracy))
-print("SGD Classifier - " + gender2 + str(accuracy2))
-print("Linear SVC - " + gender3 + str(accuracy3))
-
+print("Decision Tree - " + gender)
+print("Nearest Centroid - " + gender2)
+print("C-Support Vector - " + gender3)
 
 # determine result
 result = ''
