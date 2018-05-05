@@ -56,7 +56,7 @@ prediction = clf.predict([[height, weight, shoe_size]])
 prediction2 = clf2.predict([[height, weight, shoe_size]])
 prediction3 = clf3.predict([[height, weight, shoe_size]])
 
-# display prediction
+# display predictions
 gender = prediction[0]
 gender2 = prediction2[0]
 gender3 = prediction3[0]
@@ -65,12 +65,19 @@ print("Decision Tree - " + gender)
 print("Nearest Centroid - " + gender2)
 print("C-Support Vector - " + gender3)
 
-# determine result
+# determine final prediction
 result = ''
 if gender == gender2 or gender == gender3:
     result = gender
 else:
     result = gender3
+
+# determine gender that is not prediction
+anti_result = ''
+if result == 'Male':
+    anti_result = 'Female'
+else:
+    anti_result = 'Male'
 
 
 # write user values to data set if prediction is correct
@@ -79,6 +86,11 @@ if validation == "y":
     genderFile = open('gender.csv','a',newline='')
     genderWriter = csv.writer(genderFile)
     genderWriter.writerow([result,height,weight,shoe_size])
+    genderFile.close()
+elif validation == "n":
+    genderFile = open('gender.csv','a',newline='')
+    genderWriter = csv.writer(genderFile)
+    genderWriter.writerow([anti_result,height,weight,shoe_size])
     genderFile.close()
 else:
     exit()
