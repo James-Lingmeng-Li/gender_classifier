@@ -44,15 +44,23 @@ clf2 = clf2.fit(X, Y)
 clf3 = clf3.fit(X, Y)
 
 # enter user values for classifier
-height = float(input('What is your height? (cm)'))
-weight = float(input('What is your weight? (kg)'))
-shoe_size = float(input('What is your shoe size? (eu)'))
+height = input('What is your height? (cm)')
+weight = input('What is your weight? (kg)')
+shoe_size = input('What is your shoe size? (eu)')
 
+# catch string inputs
+try:
+    height = float(height)
+    weight = float(weight)
+    shoe_size = float(shoe_size)
+except ValueError:
+    print("Invalid input entered")
+    exit()
 # catch negative and zero inputs
 if height <= 0.0 or weight <= 0.0 or shoe_size <= 0.0:
     print('Invalid number entered')
     exit()
-
+    
 # classifier prediction
 prediction = clf.predict([[height, weight, shoe_size]])
 prediction2 = clf2.predict([[height, weight, shoe_size]])
