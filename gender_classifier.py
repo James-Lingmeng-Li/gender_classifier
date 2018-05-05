@@ -1,7 +1,7 @@
 import numpy as np
 from scipy import sparse
 import csv
-from sklearn import tree, svm
+from sklearn import svm
 from sklearn.neighbors.nearest_centroid import NearestCentroid
 
 # gender
@@ -17,9 +17,6 @@ genderReader = csv.reader(genderFile)
 # skip header
 iter_genderReader = iter(genderReader)
 next(iter_genderReader)
-
-
-
 
 # populate lists
 for row in iter_genderReader:
@@ -37,7 +34,7 @@ for row in range(X_len):
 genderFile.close()
 
 # initialize classifier
-clf = tree.DecisionTreeClassifier()
+clf = svm.LinearSVC()
 clf2 = NearestCentroid()
 clf3 = svm.SVC()
 
@@ -61,7 +58,7 @@ gender = prediction[0]
 gender2 = prediction2[0]
 gender3 = prediction3[0]
 
-print("Decision Tree - " + gender)
+print("Linear Support Vector - " + gender)
 print("Nearest Centroid - " + gender2)
 print("C-Support Vector - " + gender3)
 
@@ -78,7 +75,6 @@ if result == 'Male':
     anti_result = 'Female'
 else:
     anti_result = 'Male'
-
 
 # write user values to data set if prediction is correct
 validation = input('Is ' + result + ' correct? (y/n)')
