@@ -3,10 +3,29 @@ A gender classifier using the scikit-learn library.
 
 ## Dependencies
 
-1. sklearn (pip3 install sklearn)
-2. numpy (pip3 install numpy)
-3. scipy (pip3 install scipy)
-4. csv (pip3 install csv)
+1. sklearn 
+
+```
+pip3 install sklearn
+```
+
+2. numpy 
+
+```
+pip3 install numpy
+```
+
+3. scipy 
+
+```
+pip3 install scipy
+```
+
+4. csv 
+
+```
+pip3 install csv
+```
 
 ## Usage
 
