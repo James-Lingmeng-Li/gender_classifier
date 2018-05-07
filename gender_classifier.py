@@ -3,6 +3,7 @@ from scipy import sparse
 import csv
 from sklearn import svm
 from sklearn.neighbors.nearest_centroid import NearestCentroid
+from sklearn.metrics import accuracy_score
 
 # gender
 Y = []
@@ -34,14 +35,27 @@ for row in range(X_len):
     X[row][2] = float(X[row][2])
 
 # initialize classifier
-clf = svm.LinearSVC()
-clf2 = NearestCentroid()
-clf3 = svm.SVC()
+clf_LinearSVC = svm.LinearSVC()
+clf_NearestCentroid = NearestCentroid()
+clf_SVC = svm.SVC()
 
 # train classifier using data set
-clf = clf.fit(X, Y)
-clf2 = clf2.fit(X, Y)
-clf3 = clf3.fit(X, Y)
+clf_LinearSVC = clf_LinearSVC.fit(X, Y)
+clf_NearestCentroid = clf_NearestCentroid.fit(X, Y)
+clf_SVC = clf_SVC.fit(X, Y)
+
+# testing using data set
+test_LinearSVC = clf_LinearSVC.predict(X)
+acc_LinearSVC = accuracy_score(Y, test_LinearSVC) * 100.0
+print('Accuracy for Linear SVC: ' + str(int(acc_LinearSVC)) + '%')
+
+test_NearestCentroid = clf_NearestCentroid.predict(X)
+acc_NearestCentroid = accuracy_score(Y, test_NearestCentroid) * 100.0
+print('Accuracy for Nearest Centroid: ' + str(int(acc_NearestCentroid)) + '%')
+
+test_SVC = clf_SVC.predict(X)
+acc_SVC = accuracy_score(Y, test_SVC) * 100.0
+print('Accuracy for SVC: ' + str(int(acc_SVC)) + '%')
 
 # enter user values for classifier
 height = input('What is your height? (cm)')
@@ -60,27 +74,28 @@ except ValueError:
 if height <= 0.0 or weight <= 0.0 or shoe_size <= 0.0:
     print('Invalid number entered')
     exit()
-    
-# classifier prediction
-prediction = clf.predict([[height, weight, shoe_size]])
-prediction2 = clf2.predict([[height, weight, shoe_size]])
-prediction3 = clf3.predict([[height, weight, shoe_size]])
+
+# input prediction
+pred_LinearSVC = clf_LinearSVC.predict([[height, weight, shoe_size]])
+pred_NearestCentroid = clf_NearestCentroid.predict([[height, weight, shoe_size]])
+pred_SVC = clf_SVC.predict([[height, weight, shoe_size]])
+
 
 # display predictions
-gender = prediction[0]
-gender2 = prediction2[0]
-gender3 = prediction3[0]
+gender_LinearSVC = pred_LinearSVC[0]
+gender_NearestCentroid = pred_NearestCentroid[0]
+gender_SVC = pred_SVC[0]
 
-print("Linear Support Vector - " + gender)
-print("Nearest Centroid - " + gender2)
-print("C-Support Vector - " + gender3)
+print("Linear Support Vector - " + gender_LinearSVC)
+print("Nearest Centroid - " + gender_NearestCentroid)
+print("C-Support Vector - " + gender_SVC)
 
 # determine final prediction
 result = ''
-if gender == gender2 or gender == gender3:
-    result = gender
+if gender_LinearSVC == gender_NearestCentroid or gender_LinearSVC == gender_SVC:
+    result = gender_LinearSVC
 else:
-    result = gender3
+    result = gender_SVC
 
 # determine gender that is not prediction
 anti_result = ''
