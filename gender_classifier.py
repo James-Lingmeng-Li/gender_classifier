@@ -56,15 +56,11 @@ acc_NearestCentroid = accuracy_score(Y, test_NearestCentroid) * 100.0
 test_SVC = clf_SVC.predict(X)
 acc_SVC = accuracy_score(Y, test_SVC) * 100.0
 
-# print results
-print('Accuracy for Linear SVC: {}'.format(acc_LinearSVC) + '%')
-print('Accuracy for Nearest Centroid: {}'.format(acc_NearestCentroid) + '%')
-print('Accuracy for SVC: {}'.format(acc_SVC) + '%')
-
 # identify best classifier 
 index = np.argmax([acc_LinearSVC, acc_NearestCentroid, acc_SVC])
 classifiers = {0: 'LinearSVC', 1: 'NearestCentroid', 2: 'SVC'}
-print('Best gender classifier is {}'.format(classifiers[index]))
+best_classifier = classifiers[index]
+print('Best gender classifier is {}'.format(best_classifier))
 
 # enter user values for best classifier
 height = input('What is your height? (cm)')
@@ -84,44 +80,33 @@ if height <= 0.0 or weight <= 0.0 or shoe_size <= 0.0:
     print('Invalid number entered')
     exit()
 
-
 # predict against input
-pred = clf_LinearSVC.predict([[height, weight, shoe_size]])
-
-# display prediction
-gender_LinearSVC = pred_LinearSVC[0]
-gender_NearestCentroid = pred_NearestCentroid[0]
-gender_SVC = pred_SVC[0]
-
-print("Linear Support Vector - " + gender_LinearSVC)
-print("Nearest Centroid - " + gender_NearestCentroid)
-print("C-Support Vector - " + gender_SVC)
-
-# determine final prediction
-result = ''
-if gender_LinearSVC == gender_NearestCentroid or gender_LinearSVC == gender_SVC:
-    result = gender_LinearSVC
+if index == 0:
+    pred = clf_LinearSVC.predict([[height, weight, shoe_size]])
+elif index == 1:
+    pred = clf_NearestCentroid.predict([[height, weight, shoe_size]])
 else:
-    result = gender_SVC
+    pred = clf_SVC.predict([[height, weight, shoe_size]])
 
-# determine gender that is not prediction
-anti_result = ''
-if result == 'Male':
-    anti_result = 'Female'
+# determine gender
+gender = pred[0]
+opp_gender = ''
+if gender == 'Male':
+    opp_gender = 'Female'
 else:
-    anti_result = 'Male'
+    opp_gender = 'Male'
 
 # write user values to data set
-validation = input('Is ' + result + ' correct? (y/n)')
+validation = input('Is ' + gender + ' correct? (y/n)')
 if validation == "y":
     genderFile = open('gender.csv','a',newline='')
     genderWriter = csv.writer(genderFile)
-    genderWriter.writerow([result,height,weight,shoe_size])
+    genderWriter.writerow([gender,height,weight,shoe_size])
     genderFile.close()
 elif validation == "n":
     genderFile = open('gender.csv','a',newline='')
     genderWriter = csv.writer(genderFile)
-    genderWriter.writerow([anti_result,height,weight,shoe_size])
+    genderWriter.writerow([opp_gender,height,weight,shoe_size])
     genderFile.close()
 else:
     exit()
