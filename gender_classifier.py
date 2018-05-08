@@ -34,32 +34,31 @@ for row in range(X_len):
     X[row][1] = float(X[row][1])
     X[row][2] = float(X[row][2])
 
-# initialize classifier
+# initialize classifiers
 clf_LinearSVC = svm.LinearSVC()
 clf_NearestCentroid = NearestCentroid()
 clf_SVC = svm.SVC()
 
-# train classifier using data set
+# train classifiers using data set
 clf_LinearSVC = clf_LinearSVC.fit(X, Y)
 clf_NearestCentroid = clf_NearestCentroid.fit(X, Y)
 clf_SVC = clf_SVC.fit(X, Y)
 
-# testing using data set
+# test clasiifiers using data set
 test_LinearSVC = clf_LinearSVC.predict(X)
 acc_LinearSVC = accuracy_score(Y, test_LinearSVC) * 100.0
-acc_LinearSVC = int(acc_LinearSVC)
-print('Accuracy for Linear SVC: {}'.format(acc_LinearSVC) + '%')
 
 
 test_NearestCentroid = clf_NearestCentroid.predict(X)
 acc_NearestCentroid = accuracy_score(Y, test_NearestCentroid) * 100.0
-acc_NearestCentroid = int(acc_NearestCentroid)
-print('Accuracy for Nearest Centroid: {}'.format(acc_NearestCentroid) + '%')
 
 
 test_SVC = clf_SVC.predict(X)
 acc_SVC = accuracy_score(Y, test_SVC) * 100.0
-acc_SVC = int(acc_SVC)
+
+# print results
+print('Accuracy for Linear SVC: {}'.format(acc_LinearSVC) + '%')
+print('Accuracy for Nearest Centroid: {}'.format(acc_NearestCentroid) + '%')
 print('Accuracy for SVC: {}'.format(acc_SVC) + '%')
 
 # identify best classifier 
@@ -67,13 +66,12 @@ index = np.argmax([acc_LinearSVC, acc_NearestCentroid, acc_SVC])
 classifiers = {0: 'LinearSVC', 1: 'NearestCentroid', 2: 'SVC'}
 print('Best gender classifier is {}'.format(classifiers[index]))
 
-
-# enter user values for classifier
+# enter user values for best classifier
 height = input('What is your height? (cm)')
 weight = input('What is your weight? (kg)')
 shoe_size = input('What is your shoe size? (eu)')
 
-# catch string inputs
+# catch errors
 try:
     height = float(height)
     weight = float(weight)
@@ -81,18 +79,16 @@ try:
 except ValueError:
     print("Invalid input entered")
     exit()
-# catch negative and zero inputs
+   
 if height <= 0.0 or weight <= 0.0 or shoe_size <= 0.0:
     print('Invalid number entered')
     exit()
 
 
-# input prediction
+# predict against input
 pred = clf_LinearSVC.predict([[height, weight, shoe_size]])
 
-
-
-# display predictions
+# display prediction
 gender_LinearSVC = pred_LinearSVC[0]
 gender_NearestCentroid = pred_NearestCentroid[0]
 gender_SVC = pred_SVC[0]
