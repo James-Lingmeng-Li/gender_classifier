@@ -47,15 +47,26 @@ clf_SVC = clf_SVC.fit(X, Y)
 # testing using data set
 test_LinearSVC = clf_LinearSVC.predict(X)
 acc_LinearSVC = accuracy_score(Y, test_LinearSVC) * 100.0
-print('Accuracy for Linear SVC: ' + str(int(acc_LinearSVC)) + '%')
+acc_LinearSVC = int(acc_LinearSVC)
+print('Accuracy for Linear SVC: {}'.format(acc_LinearSVC) + '%')
+
 
 test_NearestCentroid = clf_NearestCentroid.predict(X)
 acc_NearestCentroid = accuracy_score(Y, test_NearestCentroid) * 100.0
-print('Accuracy for Nearest Centroid: ' + str(int(acc_NearestCentroid)) + '%')
+acc_NearestCentroid = int(acc_NearestCentroid)
+print('Accuracy for Nearest Centroid: {}'.format(acc_NearestCentroid) + '%')
+
 
 test_SVC = clf_SVC.predict(X)
 acc_SVC = accuracy_score(Y, test_SVC) * 100.0
-print('Accuracy for SVC: ' + str(int(acc_SVC)) + '%')
+acc_SVC = int(acc_SVC)
+print('Accuracy for SVC: {}'.format(acc_SVC) + '%')
+
+# identify best classifier 
+index = np.argmax([acc_LinearSVC, acc_NearestCentroid, acc_SVC])
+classifiers = {0: 'LinearSVC', 1: 'NearestCentroid', 2: 'SVC'}
+print('Best gender classifier is {}'.format(classifiers[index]))
+
 
 # enter user values for classifier
 height = input('What is your height? (cm)')
@@ -75,10 +86,10 @@ if height <= 0.0 or weight <= 0.0 or shoe_size <= 0.0:
     print('Invalid number entered')
     exit()
 
+
 # input prediction
-pred_LinearSVC = clf_LinearSVC.predict([[height, weight, shoe_size]])
-pred_NearestCentroid = clf_NearestCentroid.predict([[height, weight, shoe_size]])
-pred_SVC = clf_SVC.predict([[height, weight, shoe_size]])
+pred = clf_LinearSVC.predict([[height, weight, shoe_size]])
+
 
 
 # display predictions
