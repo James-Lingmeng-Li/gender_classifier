@@ -11,7 +11,10 @@ A gender classifier using the scikit-learn library.
 
 ## Usage
 
+Run the below script in terminal:
+
 ```
 python3 gender_classifier.py
 ```
 
+Prints the  best classifier based on the data set (gender.csv). Classifiers include SVC, Linear SVC, and Nearest Centroid. Enter height (cm), weight (kg), and shoe size (eu). Result is the gender predicted by the best classifier. The input values/result is added to the data set (gender.csv). 
