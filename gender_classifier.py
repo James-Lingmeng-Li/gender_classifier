@@ -4,6 +4,7 @@ import csv
 from sklearn import svm
 from sklearn.neighbors.nearest_centroid import NearestCentroid
 from sklearn.metrics import accuracy_score
+import sys
 
 # gender
 Y = []
@@ -74,11 +75,11 @@ try:
     shoe_size = float(shoe_size)
 except ValueError:
     print("Invalid input entered")
-    exit()
+    sys.exit()
    
 if height <= 0.0 or weight <= 0.0 or shoe_size <= 0.0:
     print('Invalid number entered')
-    exit()
+    sys.exit()
 
 # predict against input
 if index == 0:
@@ -109,7 +110,7 @@ elif validation == "n":
     genderWriter.writerow([opp_gender,height,weight,shoe_size])
     genderFile.close()
 else:
-    exit()
+    sys.exit()
 
 
 
