@@ -6,12 +6,6 @@ from sklearn.neighbors.nearest_centroid import NearestCentroid
 from sklearn.metrics import accuracy_score
 import sys
 
-# gender
-Y = []
-
-# [height, weight, shoe_size]
-X = []
-
 # read CSV file
 genderFile = open('gender.csv')
 genderReader = csv.reader(genderFile)
@@ -19,6 +13,12 @@ genderReader = csv.reader(genderFile)
 # skip header
 iter_genderReader = iter(genderReader)
 next(iter_genderReader)
+
+# gender
+Y = []
+
+# [height, weight, shoe_size]
+X = []
 
 # populate lists
 for row in iter_genderReader:
@@ -98,7 +98,7 @@ else:
     opp_gender = 'Male'
 
 # write user values to data set
-validation = input('Is ' + gender + ' correct? (y/n)')
+validation = input('Is %s correct? (y/n)' % gender)
 if validation == "y":
     genderFile = open('gender.csv','a',newline='')
     genderWriter = csv.writer(genderFile)
