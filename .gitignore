@@ -2,8 +2,7 @@
 # Created by https://www.gitignore.io/api/c++
 
 env/
-
-
+.vscode/
 
 
 ### C++ ###
