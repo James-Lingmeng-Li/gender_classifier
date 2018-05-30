@@ -21,4 +21,4 @@ Prints the  best classifier based on the data set (gender.csv). Classifiers incl
 
 Enter height (cm), weight (kg), and shoe size (eu). Result is the gender predicted by the best classifier. 
 
-The input values/result is then added to the data set for subsequent runs (gender.csv). 
+The results are then added to the data set for subsequent runs. 
