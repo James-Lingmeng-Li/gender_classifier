@@ -6,8 +6,12 @@ A gender classifier using the scikit-learn library.
 1. sklearn 
 2. numpy 
 3. scipy 
-4. csv 
 
+Run the below command in terminal:
+
+```
+pip3 install -r requirements.txt
+```
 
 ## Usage
 
