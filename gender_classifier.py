@@ -11,8 +11,7 @@ genderFile = open('gender.csv')
 genderReader = csv.reader(genderFile)
 
 # skip header
-iter_genderReader = iter(genderReader)
-next(iter_genderReader)
+next(genderReader)
 
 # gender
 Y = []
@@ -21,7 +20,7 @@ Y = []
 X = []
 
 # populate lists
-for row in iter_genderReader:
+for row in genderReader:
    Y.append(row[0])
    X.append(row[1:])
 
