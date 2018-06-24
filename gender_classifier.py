@@ -45,16 +45,9 @@ clf_NearestCentroid = clf_NearestCentroid.fit(X, Y)
 clf_SVC = clf_SVC.fit(X, Y)
 
 # test clasiifiers using data set
-test_LinearSVC = clf_LinearSVC.predict(X)
-acc_LinearSVC = accuracy_score(Y, test_LinearSVC) * 100.0
-
-
-test_NearestCentroid = clf_NearestCentroid.predict(X)
-acc_NearestCentroid = accuracy_score(Y, test_NearestCentroid) * 100.0
-
-
-test_SVC = clf_SVC.predict(X)
-acc_SVC = accuracy_score(Y, test_SVC) * 100.0
+acc_LinearSVC = accuracy_score(Y, clf_LinearSVC.predict(X)) * 100.0
+acc_NearestCentroid = accuracy_score(Y, clf_NearestCentroid.predict(X)) * 100.0
+acc_SVC = accuracy_score(Y, clf_SVC.predict(X)) * 100.0
 
 # identify best classifier 
 index = np.argmax([acc_LinearSVC, acc_NearestCentroid, acc_SVC])
